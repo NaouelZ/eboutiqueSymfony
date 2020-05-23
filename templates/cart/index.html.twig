@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}panier{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <h1>Votre panier !</h1>
+    {% if items | length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.product.Name }}</td>
+                        <td>{{ item.product.priceht }} €</td>
+                        <td>
+                           <a href="{{ path('cart_remove_one', {'id': item.product.id})}}" class="font-weight-bold badge badge-danger">-</a>
+                                {{ item.quantity }}
+                           <a href="{{ path('cart_add_one', {'id': item.product.id})}}" class="font-weight-bold badge badge-success">+</a>
+                        </td>
+                        <td>{{item.product.priceht * item.quantity }} €</td>
+                        <td>
+                        <a href="{{ path('cart_remove', {'id': item.product.id})}}" class="btn btn-danger btn-sm">
+                        Supprimer
+                        </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total: </td>
+                <td>{{ total }} €</td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <a href="{{ path('desk_shop') }}" class="btn btn-lg btn-block btn-warning text-uppercase text-light">Continuer le shopping</a>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    {% if app.user %}
+                        <a href="{{ path('address_new') }}" class="btn btn-lg btn-block btn-success text-uppercase text-light">Commander</a>
+                    {% else %}
+                         <a href="{{ path('security_login') }}" class="btn btn-lg btn-block btn-danger text-uppercase text-light">Veuillez vous connecter pour commander</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p> Vous n'avez encore selectionnée aucun article </p>
+    {% endif %}
+</div>
+{% endblock %}

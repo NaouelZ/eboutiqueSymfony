@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <h1>Vous êtes sur l'espace administrateur</h1>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ path('category_index') }}">
+                Voir la liste des catégories
+           </a>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ path('media_index') }}">
+           Voir la liste des médias
+           </a>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ path('product_index') }}">
+            Voir la liste des produits
+            </a>
+        </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ path('user_index') }}">
+            Voir la liste des utilisateurs
+            </a>
+        </li>
+    </ul>
+{% endblock %}

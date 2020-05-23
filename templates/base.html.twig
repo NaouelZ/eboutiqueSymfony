@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link href="https://bootswatch.com/4/lux/bootstrap.min.css" rel="stylesheet">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Deskshtop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('desk_shop') }}">Produits</a>
+            </li>
+            {% if app.user %}
+            <li class="nav-item">
+                <a class="btn btn-success" href="{{ path('deskshop_profile') }}">mon Profile</a>
+            </li>
+            {% endif %}
+            </ul>
+            <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                {% if not app.user %}
+                <li class="nav_item">
+                    <a href="{{ path('security_login') }}" class="nav-link">Connexion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
+                </li>
+                {% else %}
+                <li class="nav_item">
+                <a href="{{ path('security_logout') }}" class="nav-link">Déconnexion</a>
+                </li>
+                {% endif %}
+            </li>
+            <a class="btn btn-secondary my-2 my-sm-0" href="{{ path('admin') }}">Administrateur</a>
+        </div>
+        <a class="btn btn-warning float-right" href="{{ path('cart_index') }}">Panier</a>
+        </nav>
+      <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajouter votre addresse pour commander </h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_row(form.Type, {'label': 'Type de commande'}) }}
+    {{ form_row(form.Name, {'label': 'Nom'}) }}
+    {{ form_row(form.FirstName, {'label': 'Prénom'})}}
+    <button type="submit" class="btn btn-success">Confirmer la commande !</button>
+    {{ form_end(form) }}
+
+{% endblock %}

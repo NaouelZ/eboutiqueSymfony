@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les produits...{% endblock %}
+
+{% block body %}
+{# {% for product in products %}
+<article>
+        <h2>{{ product.Name }}</h2>
+        <div class="content">
+            {{ product.description | raw }}
+            <br />
+        </div>
+    </article>
+</section>
+{% endfor %} #}
+    <section id="products" style="margin-top: 15px;">
+    <div class="row">
+
+      <div class="col-lg-3">
+
+        <h1 class="my-4">Categories</h1>
+        <div class="list-group">
+        {% for category in categories %}
+          <a href="{{ path('deskshop_category', {'category': category.id}) }}" class="list-group-item">{{ category.Name }}</a>
+        {% endfor %}
+        </div>
+        <a href="{{ path('desk_shop') }}" class="badge badge-pill badge-danger">Supprimer les filtres</a>
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+
+        <div class="row">
+        {% for product in products %}
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              {% for key, media in product.medias %}
+                {% if key == 0 %}
+                <a href="#"><img class="card-img-top" src={{ media.path }} alt={{ media.alt }} height="250px"></a>
+                {% endif %}
+					    {% endfor %}
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">{{ product.Name }}</a>
+                </h4>
+                <h5>{{ product.PriceHT }} € </h5>
+                <p class="card-text">{{ product.Description }}</p>
+              </div>
+              <div class="card-footer">
+                    <a href="{{path('deskshop_show', {'id': product.id})}}" class="btn btn-primary">Voir</a>
+                    <a type="button" class="btn btn-success" href="{{ path('cart_add', {'id': product.id}) }}">
+                      Acheter
+                    </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}
